@@ -23,7 +23,7 @@
   /* ---------- Catalog ---------- */
 
   function fetchCatalog() {
-    return fetch("catalog.json", { headers: { Accept: "application/json" } })
+    return fetch("catalog.json?v=" + Date.now(), { headers: { Accept: "application/json" }, cache: "no-store" })
       .then(function (r) {
         if (!r.ok) throw new Error("Katalog alınamadı (HTTP " + r.status + ")");
         return r.json();
@@ -137,7 +137,10 @@
     var games = filteredGames();
     count.textContent = (state.catalog ? state.catalog.games.length : 0) + " APK listeleniyor";
     if (!games.length) {
-      grid.innerHTML = '<div class="empty">Bu kategoride APK bulunamadı.</div>';
+      var totalCount = (state.catalog ? state.catalog.games.length : 0);
+      grid.innerHTML = totalCount
+        ? '<div class="emptystate"><div class="emptystate-icon">🔍</div><h3>Aradığın APK bulunamadı</h3><p>Filtreyi veya arama terimini değiştirerek tekrar dene.</p></div>'
+        : '<div class="emptystate"><div class="emptystate-icon">📱</div><h3>APK kataloğu yakında dolu</h3><p>İlk uygulamalar ekleniyor. Birkaç gün içinde indirmeler seninle</p></div>';
       return;
     }
     grid.innerHTML = games.map(card).join("");
