@@ -249,6 +249,15 @@ img { max-width: 100%; display: block; }
 .app-cta { display: flex; gap: 10px; flex-wrap: wrap; }
 .app-cta .btn { min-width: 0; }
 
+/* ---------- Security ---------- */
+.sec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+.sec-card { background: var(--bg-raised); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow-soft); }
+.sec-card h3 { font-size: 0.98rem; margin-bottom: 6px; }
+.sec-card p { color: var(--text-dim); font-size: 0.85rem; }
+.sec-icon { font-size: 1.4rem; margin-bottom: 8px; }
+.sec-note { margin-top: 18px; font-size: 0.78rem; color: var(--text-dim); word-break: break-all; }
+.hash { background: var(--bg-soft); padding: 2px 7px; border-radius: 6px; font-size: 0.8rem; color: var(--accent-strong); }
+
 @media (max-width: 640px) {
   .app-banner { flex-direction: column; text-align: center; padding: 20px; }
   .app-cta { justify-content: center; }
