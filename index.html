@@ -34,8 +34,17 @@
         <a href="#/sss">SSS</a>
       </nav>
       <a class="btn btn-primary btn-sm nav-cta" href="#/katalog">📱 Katalog</a>
+    <button id="themeToggle" class="btn btn-ghost btn-sm theme-toggle" title="Tema Değiştir" aria-label="Tema değiştir">🌙</button>
     </div>
   </header>
+
+  <div id="newsBanner" class="news-banner" hidden>
+    <div class="wrap news-banner-inner">
+      <span class="news-ico">📢</span>
+      <div class="news-text" id="newsText"></div>
+      <button class="news-close" id="newsClose" aria-label="Kapat">✕</button>
+    </div>
+  </div>
 
   <div id="updateBanner" class="update-banner" hidden></div>
 
@@ -205,6 +214,8 @@
       <p class="footer-meta">v2.5.0 · © 2026 ApkHTML</p>
     </div>
   </footer>
+
+  <button id="feedbackBtn" class="feedback-fab" title="Geri Bildirim & Hata Bildir">💬</button>
 
   <script src="app.js"></script>
 </body>

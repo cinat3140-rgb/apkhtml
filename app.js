@@ -20,6 +20,62 @@
     return n.toFixed(n >= 100 ? 0 : 1) + " " + units[i];
   }
 
+  /* ---------- Theme ---------- */
+  function initTheme() {
+    var saved = localStorage.getItem("apkhtml.theme");
+    var theme = saved || "";
+    if (!theme && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) theme = "dark";
+    if (theme) document.documentElement.setAttribute("data-theme", theme);
+    var btn = $("#themeToggle");
+    if (btn) btn.textContent = theme === "dark" ? "☀️" : "🌙";
+  }
+  function toggleTheme() {
+    var cur = document.documentElement.getAttribute("data-theme");
+    var next = cur === "dark" ? "light" : "dark";
+    if (next === "light" && (!window.matchMedia || !window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+      document.documentElement.removeAttribute("data-theme");
+      localStorage.removeItem("apkhtml.theme");
+    } else {
+      document.documentElement.setAttribute("data-theme", next);
+      localStorage.setItem("apkhtml.theme", next);
+    }
+    var btn = $("#themeToggle");
+    if (btn) btn.textContent = next === "dark" ? "☀️" : "🌙";
+  }
+
+  /* ---------- News banner ---------- */
+  function fetchNews() {
+    fetch("news.json", { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : null; }).then(function (data) {
+      if (!data || !data.title) return;
+      var dismissed = {};
+      try { dismissed = JSON.parse(localStorage.getItem("apkhtml.newsDismiss") || "{}"); } catch (e) {}
+      if (dismissed[data.title]) return;
+      var el = $("#newsBanner");
+      var txt = $("#newsText");
+      if (!el || !txt) return;
+      txt.innerHTML = "<strong>" + esc(data.title) + "</strong>" + (data.body ? " — " + data.body : "");
+      el.hidden = false;
+    }).catch(function () {});
+  }
+  function dismissNews() {
+    var el = $("#newsBanner");
+    if (el) el.hidden = true;
+    fetch("news.json", { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : null; }).then(function (data) {
+      if (!data || !data.title) return;
+      var d = {};
+      try { d = JSON.parse(localStorage.getItem("apkhtml.newsDismiss") || "{}"); } catch (e) {}
+      d[data.title] = true;
+      localStorage.setItem("apkhtml.newsDismiss", JSON.stringify(d));
+    }).catch(function () {});
+  }
+
+  /* ---------- Feedback ---------- */
+  function openFeedback() {
+    var subject = encodeURIComponent("ApkHTML Geri Bildirim");
+    var body = encodeURIComponent("Tarayıcı: " + navigator.userAgent + "\n\nMesajınız:");
+    window.open("mailto:cinat3140@gmail.com?subject=" + subject + "&body=" + body, "_blank");
+  }
+
   /* ---------- Catalog ---------- */
 
   function fetchCatalog() {
@@ -85,6 +141,17 @@
     return '<div class="placeholder">📱</div>';
   }
 
+  function statsHtml(g) {
+    var st = g.stats || {};
+    var views = st.views || g.popularity || 0;
+    var dl = st.downloads || 0;
+    var parts = [];
+    if (views > 0) parts.push('<span class="stat-views">' + views.toLocaleString("tr-TR") + " görüntülenme</span>");
+    if (dl > 0) parts.push('<span class="stat-downloads">' + dl.toLocaleString("tr-TR") + " indirme</span>");
+    if (g.isFeatured) parts.push('<span class="stat-views stat-popular">Popüler</span>');
+    return parts.length ? '<div class="gcard-stats">' + parts.join("") + "</div>" : "";
+  }
+
   function badges(a) {
     var out = "";
     if (a.android) out += '<span class="gcard-android">🤖 Android ' + esc(a.android) + "</span>";
@@ -125,6 +192,7 @@
             (a.version ? '<span class="gcard-ver">v' + esc(a.version) + "</span>" : "") +
             badges(a) +
           "</div>" +
+          statsHtml(g) +
           '<div class="gcard-actions">' + actions + "</div>" +
         "</div>" +
       "</article>"
@@ -301,8 +369,18 @@
   };
 
   window.addEventListener("hashchange", route);
-  document.addEventListener("DOMContentLoaded", route);
-  if (document.readyState !== "loading") route();
+  document.addEventListener("DOMContentLoaded", function () {
+    initTheme();
+    fetchNews();
+    route();
+    var themeBtn = $("#themeToggle");
+    if (themeBtn) themeBtn.addEventListener("click", toggleTheme);
+    var newsClose = $("#newsClose");
+    if (newsClose) newsClose.addEventListener("click", dismissNews);
+    var feedbackBtn = $("#feedbackBtn");
+    if (feedbackBtn) feedbackBtn.addEventListener("click", openFeedback);
+  });
+  if (document.readyState !== "loading") { initTheme(); route(); }
 
   document.addEventListener("click", function (e) {
     var t = e.target;
