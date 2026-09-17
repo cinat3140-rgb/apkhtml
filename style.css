@@ -11,6 +11,7 @@
   --radius: 14px;
   --shadow: 0 14px 44px rgba(15, 23, 42, 0.1);
   --shadow-soft: 0 6px 20px rgba(15, 23, 42, 0.06);
+  color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,6 +23,7 @@
     --text: #f1f5f9;
     --text-dim: #94a3b8;
     --shadow: 0 14px 44px rgba(0, 0, 0, 0.5);
+    color-scheme: dark;
   }
 }
 
@@ -33,6 +35,7 @@
   --text: #f1f5f9;
   --text-dim: #94a3b8;
   --shadow: 0 14px 44px rgba(0, 0, 0, 0.5);
+  color-scheme: dark;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
