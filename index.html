@@ -30,7 +30,7 @@
       </a>
       <nav class="nav-links">
         <a href="#/katalog">Katalog</a>
-        <a href="#/indir">Kurulum</a>
+        <a href="#/kurulum">Kurulum</a>
         <a href="#/sss">SSS</a>
       </nav>
       <a class="btn btn-primary btn-sm nav-cta" href="#/katalog">📱 Katalog</a>
@@ -57,7 +57,7 @@
           <p class="hero-sub">ApkHTML, Android cihazın için derlenmiş güvenilir APK dosyalarını uyumluluk ve boyut bilgileriyle sunar. İndir, kur, oyna.</p>
           <div class="hero-cta">
             <a class="btn btn-primary btn-lg" href="#/katalog">📱 Katalogu Aç</a>
-            <a class="btn btn-ghost btn-lg" href="#/indir">📲 Kurulum Rehberi</a>
+            <a class="btn btn-ghost btn-lg" href="#/kurulum">📲 Kurulum Rehberi</a>
           </div>
           <div class="hero-app">
             <a class="btn btn-primary" href="downloads/ApkHTML_2.7.0.apk" download>📦 ApkHTML Uygulaması (v2.7.0)</a>
@@ -99,7 +99,7 @@
               <div class="app-detail">Vurgulanan: katalogda gezin, istediğin oyunu ara, detaylarını incele, "Bu Sayfaya Git" ile oyunun sitedeki sayfasını aç ve APK'yı oradan indir.</div>
               <div class="app-cta">
                 <a class="btn btn-primary" href="downloads/ApkHTML_2.7.0.apk" download>📲 APK'yı İndir (12.6 MB)</a>
-                <a class="btn btn-ghost" href="#/indir">Kurulum Rehberi</a>
+                <a class="btn btn-ghost" href="#/kurulum">Kurulum Rehberi</a>
               </div>
             </div>
           </div>
@@ -185,6 +185,55 @@
       </div>
     </section>
 
+    <section data-view="kurulum" hidden>
+      <div class="wrap section">
+        <h1 class="page-title">Kurulum</h1>
+        <p class="page-sub">Tek akış; seçim gerekmez. Adımları sırayla takip et, uygulama üzerine yazma ile güncellenir.</p>
+        <div id="setupWizard">
+          <div class="setup-bar"><div id="setupBarFill" class="setup-bar-fill"></div></div>
+          <div class="sw-steps">
+            <div class="sw-step" id="swStep1">
+              <div class="sw-num">1</div>
+              <div class="sw-body">
+                <div class="sw-title">APK hazırlanıyor</div>
+                <p class="sw-sub">Uygulama paketi indiriliyor ve doğrulanıyor.</p>
+              </div>
+              <div class="sw-check">⋯</div>
+            </div>
+            <div class="sw-step" id="swStep2">
+              <div class="sw-num">2</div>
+              <div class="sw-body">
+                <div class="sw-title">Kaynak izni</div>
+                <p class="sw-sub">"Bilinmeyen kaynaklara izin ver" hazırlanıyor; gerektiğinde yalnızca bir dokunuş.</p>
+              </div>
+              <div class="sw-check">⋯</div>
+            </div>
+            <div class="sw-step" id="swStep3">
+              <div class="sw-num">3</div>
+              <div class="sw-body">
+                <div class="sw-title">Uygulama yerleştiriliyor</div>
+                <p class="sw-sub">Eski sürüm silinmez, yeni sürüm üzerine yazılır; veriler, hesaplar ve ayarlar korunur.</p>
+              </div>
+              <div class="sw-check">⋯</div>
+            </div>
+            <div class="sw-step" id="swStep4">
+              <div class="sw-num">4</div>
+              <div class="sw-body">
+                <div class="sw-title">Oynamaya hazır</div>
+                <p class="sw-sub">Kurulum tamamlandı. Katalogdan uygulamayı seç ve başlat.</p>
+              </div>
+              <div class="sw-check">⋯</div>
+            </div>
+          </div>
+          <div class="sw-actions">
+            <button class="btn btn-primary btn-lg" id="setupNext" type="button">Sıradaki →</button>
+            <a class="btn btn-ghost" href="#/katalog">Kataloğa Dön</a>
+          </div>
+          <p class="sw-status dim" id="setupStatus"></p>
+        </div>
+      </div>
+    </section>
+
     <section data-view="sss" hidden>
       <div class="wrap section">
         <h1 class="page-title">Sık Sorulan Sorular</h1>
@@ -208,7 +257,7 @@
       </div>
       <nav class="footer-links">
         <a href="#/katalog">Katalog</a>
-        <a href="#/indir">Kurulum</a>
+        <a href="#/kurulum">Kurulum</a>
         <a href="#/sss">SSS</a>
       </nav>
       <p class="footer-meta">v2.6.0 · © 2026 ApkHTML</p>
