@@ -48,7 +48,7 @@
 
   /* ---------- Theme ---------- */
   function initTheme() {
-    var saved = localStorage.getItem("apkhtml.theme");
+    var saved = localStorage.getItem("html.theme");
     var theme = saved || "";
     if (!theme && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) theme = "dark";
     if (theme) document.documentElement.setAttribute("data-theme", theme);
@@ -60,10 +60,10 @@
     var next = cur === "dark" ? "light" : "dark";
     if (next === "light" && (!window.matchMedia || !window.matchMedia("(prefers-color-scheme: dark)").matches)) {
       document.documentElement.removeAttribute("data-theme");
-      localStorage.removeItem("apkhtml.theme");
+      localStorage.removeItem("html.theme");
     } else {
       document.documentElement.setAttribute("data-theme", next);
-      localStorage.setItem("apkhtml.theme", next);
+      localStorage.setItem("html.theme", next);
     }
     var btn = $("#themeToggle");
     if (btn) btn.textContent = next === "dark" ? "☀️" : "🌙";
