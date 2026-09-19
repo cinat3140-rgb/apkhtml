@@ -292,7 +292,6 @@
       : "";
 
     el.innerHTML =
-      '<div class="detail-social" id="detailSocial" data-gid="' + (g.id) + '"></div>' +
       '<div class="detail-head">' +
           '<div class="detail-cover-wrap">' + coverWithFallback(g) + (g.isFeatured ? '<span class="gcard-featured">★ Öne Çıkan</span>' : "") + "</div>" +
           '<div class="detail-titleblock">' +
@@ -314,7 +313,8 @@
           '<div class="detail-panel-title">APK Bilgileri</div>' +
           '<div class="info-list">' + infoRows + "</div>" +
         "</aside>" +
-      "</div>";
+      "</div>" +
+      '<div class="detail-social" id="detailSocial" data-gid="' + (g.id) + '"></div>';
     setTimeout(function () { initComments(g.id); }, 0);
   }
 
